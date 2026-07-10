@@ -106,10 +106,10 @@ loader.classList.add("loader-screen");
 loader.innerHTML = `
   <div class="loader-logo">
     <div class="loader-circle">
-      <span>M</span>
+      <span>L</span>
     </div>
 
-    <h1>MT VAREJÃO</h1>
+    <h1>LURE STORE</h1>
   </div>
 `;
 
@@ -143,7 +143,7 @@ loaderStyle.innerHTML = `
   width:100vw;
   height:100vh;
   height:100dvh;
-  background:#fffdf8;
+  background:#f5f5f5;
   display:grid;
   place-items:center;
   z-index:999999;
@@ -181,8 +181,8 @@ loaderStyle.innerHTML = `
   position:absolute;
   inset:0;
   border-radius:50%;
-  border:3px solid rgba(255,216,107,.22);
-  border-top:3px solid #b8860b;
+  border:3px solid rgba(0,0,0,.1);
+  border-top:3px solid #333;
   animation:spin 1s linear infinite;
 }
 
@@ -191,7 +191,7 @@ loaderStyle.innerHTML = `
   z-index:2;
   font-size:${isMobile ? "40px" : "56px"};
   font-weight:800;
-  color:#b8860b;
+  color:#333;
   line-height:1;
   user-select:none;
 }
@@ -412,7 +412,7 @@ rippleStyle.innerHTML = `
   position:absolute;
   width:16px;
   height:16px;
-  background:rgba(255,216,107,.28);
+  background:rgba(0,0,0,.12);
   border-radius:50%;
   transform:translate(-50%,-50%);
   animation:ripple ${isMobile ? ".4s" : ".7s"} linear;
@@ -429,8 +429,8 @@ rippleStyle.innerHTML = `
   padding:28px 18px;
   border-radius:20px;
   background:rgba(255,255,255,.85);
-  border:1px solid rgba(184,134,11,.18);
-  color:#8a7a4a;
+  border:1px solid rgba(0,0,0,.1);
+  color:#555;
   text-align:center;
   font-size:14px;
 }
@@ -477,7 +477,7 @@ glowStyle.innerHTML = `
   width:500px;
   height:500px;
   border-radius:50%;
-  background:radial-gradient(circle, rgba(255,216,107,.18), transparent 70%);
+  background:radial-gradient(circle, rgba(0,0,0,.08), transparent 70%);
   pointer-events:none;
   transform:translate(-50%,-50%);
   z-index:-1;
@@ -612,4 +612,4 @@ document.addEventListener("touchend", (e) => {
 // FINAL
 // ==========================================
 
-console.log("MT VAREJÃO OFC ATIVO 🚀");
+console.log("LURE STORE ATIVO 🚀");
