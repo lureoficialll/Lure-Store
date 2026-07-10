@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width,
+             initial-scale=1.0,
+             minimum-scale=1.0,
+             maximum-scale=1.0,
+             user-scalable=no,
+             viewport-fit=cover"
+  >
+
+  <title>MT Varejão OFC</title>
+
+  <link rel="manifest" href="manifest.json">
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="Icones/Image/Zroxo.png">
+
+  <link
+    rel="apple-touch-icon"
+    href="Icones/Image/Zroxo.png">
+
+  <meta name="theme-color" content="#fffdf8">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="MT Varejão OFC">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <link rel="stylesheet" href="style.css"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <div class="top-offer-bar">
+    <img
+      src="Icones/Icon/shopping-bag.svg"
+      alt=""
+      class="top-offer-icon"
+      draggable="false"
+    >
+
+    <span>Ofertas selecionadas todos os dias para você economizar!</span>
+
+    <img
+      src="Icones/Icon/fire.svg"
+      alt=""
+      class="top-offer-icon"
+      draggable="false"
+    >
+  </div>
+
+  <div class="background"></div>
+
+  <main class="container">
+
+    <header class="topbar">
+
+      <div class="logo">
+
+        <div class="logo-icon">
+          M
+        </div>
+
+        <div class="logo-text">
+
+          <h2>MT VAREJÃO</h2>
+
+          <p>OFC</p>
+
+        </div>
+
+      </div>
+
+      <nav class="desktop-nav">
+        <a href="#inicio">
+          <img src="Icones/Icon/home.svg" alt="" class="nav-icon" draggable="false">
+          Início
+        </a>
+
+        <a href="#ofertas">
+          Ofertas
+        </a>
+
+        <a href="#contato">
+          <img src="Icones/Icon/info.svg" alt="" class="nav-icon" draggable="false">
+          Contato
+        </a>
+      </nav>
+
+      <button class="share-btn" id="installBtn" type="button" aria-label="Instalar aplicativo">
+
+        <img
+          src="Icones/Icon/install.svg"
+          alt=""
+          class="btn-icon"
+          draggable="false"
+        >
+
+        <span>Instalar App</span>
+
+      </button>
+
+    </header>
+
+    <section class="hero-card" id="inicio">
+
+      <div class="hero-left">
+
+        <div class="avatar hero-avatar">
+
+          <img
+            src="Icones/Image/logo.png"
+            alt="MT Varejão OFC"
+            loading="eager"
+            draggable="false"
+          >
+
+        </div>
+
+      </div>
+
+      <div class="hero-center">
+
+        <h1>
+          @mtvarejaoofc
+
+          <img
+            src="Icones/Icon/badge-check.svg"
+            alt="Verificado"
+            class="verified-icon"
+            draggable="false"
+          >
+        </h1>
+
+        <p class="subtitle">
+          Ofertas e Achadinhos
+        </p>
+
+        <p class="bio">
+          Os melhores produtos, promoções e achadinhos da internet em um só lugar.
+        </p>
+
+        <div class="hero-actions">
+
+          <a
+            class="hero-btn"
+            href="https://www.instagram.com/mt.varejaoofc/"
+            target="_blank"
+            rel="noopener noreferrer">
+
+            <img
+              src="Icones/Icon/instagram.svg"
+              alt=""
+              class="hero-btn-icon"
+              draggable="false">
+
+            Instagram
+          </a>
+
+          <a
+            class="hero-btn"
+            href="mailto:mtvarejaoofc@gmail.com">
+
+            <img
+              src="Icones/Icon/mail.svg"
+              alt=""
+              class="hero-btn-icon"
+              draggable="false">
+
+            E-mail
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="hero-visual">
+
+        <img
+          src="Icones/Image/Carrinho0.png"
+          alt=""
+          class="hero-cart-img"
+          draggable="false"
+        >
+
+        <div class="discount-bubble">
+          <img
+            src="Icones/Icon/percent.svg"
+            alt=""
+            class="discount-icon"
+            draggable="false"
+          >
+        </div>
+
+        <div class="coin coin-1">
+          <img src="Icones/Icon/coin.svg" alt="" draggable="false">
+        </div>
+
+        <div class="coin coin-2">
+          <img src="Icones/Icon/coin.svg" alt="" draggable="false">
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="products-section" id="ofertas">
+
+      <div class="section-title premium-section-title">
+
+        <div>
+          <h3>Ofertas em Destaque</h3>
+          <p>Confira os produtos mais recomendados do momento</p>
+        </div>
+
+        <div class="section-actions">
+
+          <button
+            class="see-all-btn"
+            type="button"
+            onclick="window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})">
+
+            Ver todos
+            <span>→</span>
+
+          </button>
+
+          <button
+            class="layout-toggle"
+            id="layoutToggle"
+            type="button"
+            aria-label="Trocar visual dos cards">
+
+            <img
+              src="Icones/Icon/layout-grid.svg"
+              alt=""
+              id="layoutIcon"
+              draggable="false"
+            >
+
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="products" id="products">
+
+      </div>
+
+    </section>
+
+    <section class="security-strip">
+
+      <div>
+        <img src="Icones/Icon/shield-check.svg" alt="" class="strip-icon" draggable="false">
+        <span>Todos os produtos são selecionados com cuidado.</span>
+      </div>
+
+      <div>
+        <img src="Icones/Icon/lock.svg" alt="" class="strip-icon" draggable="false">
+        <span>Links verificados para comprar com segurança.</span>
+      </div>
+
+    </section>
+
+    <section class="instagram-banner" id="contato">
+
+      <div class="gift-box">
+        <img
+          src="Icones/Image/CAIXA.png"
+          alt=""
+          draggable="false"
+        >
+      </div>
+
+      <div class="instagram-banner-content">
+
+        <h2>Novas ofertas todos os dias!</h2>
+
+        <p>
+          Siga o MT Varejão OFC no Instagram e não perca nenhuma promoção.
+        </p>
+
+        <a
+          href="https://www.instagram.com/mt.varejaoofc/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="instagram-banner-btn">
+
+          <img
+            src="Icones/Icon/instagram.svg"
+            alt=""
+            class="banner-btn-icon"
+            draggable="false"
+          >
+
+          Seguir no Instagram
+        </a>
+
+      </div>
+
+      <div class="phone-preview">
+        @mtvarejaoofc
+      </div>
+
+    </section>
+
+    <footer class="footer">
+
+      <p>© 2026 MT Varejão OFC. Todos os direitos reservados.</p>
+
+      <button
+        class="back-top-btn"
+        type="button"
+        onclick="window.scrollTo({top:0,behavior:'smooth'})">
+
+        ↑ Voltar ao topo
+      </button>
+
+    </footer>
+
+  </main>
+
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="script.js"></script>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js");
+      });
+    }
+
+    let deferredPrompt = null;
+
+    const installBtn = document.getElementById("installBtn");
+
+    if (installBtn) {
+
+      const isIOS =
+        /iphone|ipad|ipod/i.test(navigator.userAgent);
+
+      const isStandalone =
+        window.matchMedia("(display-mode: standalone)").matches ||
+        navigator.standalone;
+
+      installBtn.style.display = "none";
+
+      window.addEventListener("beforeinstallprompt", (e) => {
+
+        e.preventDefault();
+
+        deferredPrompt = e;
+
+        if (!isStandalone) {
+          installBtn.style.display = "flex";
+        }
+
+      });
+
+      if (isIOS && !isStandalone) {
+        installBtn.style.display = "flex";
+      }
+
+      installBtn.addEventListener("click", async () => {
+
+        if (isIOS) {
+
+          alert(
+            "Para instalar o aplicativo:\n\nSafari → Compartilhar → Adicionar à Tela de Início"
+          );
+
+          return;
+        }
+
+        if (!deferredPrompt) {
+
+          alert("Instalação indisponível no momento.");
+
+          return;
+        }
+
+        deferredPrompt.prompt();
+
+        await deferredPrompt.userChoice;
+
+        deferredPrompt = null;
+
+        installBtn.style.display = "none";
+
+      });
+
+      window.addEventListener("appinstalled", () => {
+
+        installBtn.style.display = "none";
+
+      });
+
+    }
+  </script>
+
+</body>
+
+</html>

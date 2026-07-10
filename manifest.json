@@ -1,0 +1,25 @@
+{
+  "name": "MT Varejão OFC",
+  "short_name": "MT Varejão",
+  "description": "Ofertas, promoções e achadinhos selecionados todos os dias.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fffdf8",
+  "theme_color": "#fffdf8",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "Icones/Image/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "Icones/Image/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
