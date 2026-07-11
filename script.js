@@ -19,6 +19,8 @@ console.log("Firebase conectado:", db);
 const isMobile = window.innerWidth <= 768;
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+console.log(`📱 Dispositivo: ${isMobile ? 'MOBILE' : 'DESKTOP'}`);
+
 
 // ==========================================
 // CARD LAYOUT SYSTEM
@@ -31,27 +33,27 @@ let currentLayout = localStorage.getItem("zyqen-card-layout") || "list";
 let cachedProducts = [];
 let isChangingLayout = false;
 
-function updateLayoutIcon(){
-  if(!layoutIcon) return;
+function updateLayoutIcon() {
+  if (!layoutIcon) return;
 
-  if(currentLayout === "list"){
+  if (currentLayout === "list") {
     layoutIcon.src = "Icones/Icon/layout-grid.svg";
-  }else{
+  } else {
     layoutIcon.src = "Icones/Icon/layout-list.svg";
   }
 }
 
-function applyProductsLayout(){
+function applyProductsLayout() {
   const productsContainer = document.querySelector(".products");
-  if(!productsContainer) return;
+  if (!productsContainer) return;
 
   productsContainer.classList.toggle("grid-view", currentLayout === "grid");
   updateLayoutIcon();
 }
 
-if(layoutToggle){
+if (layoutToggle) {
   layoutToggle.addEventListener("click", () => {
-    if(isChangingLayout) return;
+    if (isChangingLayout) return;
 
     isChangingLayout = true;
 
@@ -122,7 +124,7 @@ window.addEventListener("load", () => {
     loader.style.transform = "scale(1.04)";
 
     setTimeout(() => {
-      if(loader) loader.remove();
+      if (loader) loader.remove();
     }, 700);
 
   }, isMobile ? 650 : 1100);
@@ -210,7 +212,7 @@ document.head.appendChild(loaderStyle);
 // HELPERS
 // ==========================================
 
-function safeText(value){
+function safeText(value) {
   return String(value || "")
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
@@ -221,58 +223,129 @@ function safeText(value){
 
 
 // ==========================================
-// FIREBASE PRODUCTS
+// MOSTRAR PRODUTO EM DESTAQUE NO HERO (APENAS DESKTOP)
 // ==========================================
 
-async function loadProducts(){
-
-  const productsContainer = document.querySelector(".products");
-
-  if(!productsContainer){
-    console.error("Container .products não encontrado");
+function renderHeroProduct(products) {
+  const heroContainer = document.getElementById('heroProduct');
+  if (!heroContainer) {
+    console.warn("⚠️ Elemento #heroProduct não encontrado");
     return;
   }
 
-  productsContainer.innerHTML = "";
+  // Se for MOBILE, esconde o container
+  if (isMobile) {
+    heroContainer.style.display = 'none';
+    return;
+  }
 
-  try{
+  // Se for DESKTOP, mostra
+  heroContainer.style.display = 'block';
+
+  if (!products || products.length === 0) {
+    heroContainer.innerHTML = `
+      <div class="hero-product" style="justify-content:center; opacity:0.6;">
+        <span style="font-size:13px; color:#999;">Nenhum produto em destaque</span>
+      </div>
+    `;
+    return;
+  }
+
+  // Pega o primeiro produto da lista
+  const product = products[0];
+
+  const name = safeText(product.name || 'Sem nome');
+  const price = safeText(product.price || '0');
+  const image = product.image || 'https://via.placeholder.com/300';
+  const link = product.link || '#';
+
+  heroContainer.innerHTML = `
+    <a href="${link}" target="_blank" rel="noopener noreferrer" class="hero-product">
+      <img src="${image}" alt="${name}" class="hero-product-img" loading="lazy">
+      <div class="hero-product-info">
+        <h4>${name}</h4>
+        <p>R$ ${price}</p>
+      </div>
+      <span class="hero-product-link">Comprar</span>
+    </a>
+  `;
+
+  console.log("✅ Produto em destaque renderizado (Desktop):", name);
+}
+
+
+// ==========================================
+// FIREBASE PRODUCTS
+// ==========================================
+
+async function loadProducts() {
+  const productsContainer = document.querySelector(".products");
+
+  if (!productsContainer) {
+    console.error("❌ Container .products não encontrado");
+    return;
+  }
+
+  productsContainer.innerHTML = '<div class="empty-products">Carregando produtos...</div>';
+
+  try {
+    console.log("🔄 Buscando produtos no Firestore...");
     const querySnapshot = await getDocs(collection(db, "products"));
+
+    console.log("📦 Documentos encontrados:", querySnapshot.size);
 
     cachedProducts = [];
 
     querySnapshot.forEach((docItem) => {
-      cachedProducts.push(docItem.data());
+      const data = docItem.data();
+      console.log("📄 Produto:", data.name, "- R$", data.price);
+      cachedProducts.push({
+        id: docItem.id,
+        ...data
+      });
     });
 
-    if(cachedProducts.length === 0){
+    if (cachedProducts.length === 0) {
       productsContainer.innerHTML = `
         <div class="empty-products">
           Nenhum produto cadastrado ainda.
         </div>
       `;
+      renderHeroProduct([]);
       return;
     }
 
+    // Renderiza os produtos na lista
     renderProducts(cachedProducts);
+    console.log("✅ Produtos carregados com sucesso! Total:", cachedProducts.length);
 
-    console.log("Produtos carregados 🚀");
+    // 🔥 MOSTRA O PRIMEIRO PRODUTO NO HERO (APENAS DESKTOP)
+    renderHeroProduct(cachedProducts);
 
-  }catch(error){
-    console.error("Erro Firebase:", error);
+    // Atualiza o contador
+    updateProductCounter(cachedProducts.length);
 
+  } catch (error) {
+    console.error("❌ Erro ao carregar produtos:", error);
     productsContainer.innerHTML = `
       <div class="empty-products">
-        Erro ao carregar produtos.
+        Erro ao carregar produtos. Tente novamente mais tarde.
+        <br><small>${error.message}</small>
       </div>
     `;
   }
 }
 
-function renderProducts(products){
+
+// ==========================================
+// RENDER PRODUCTS
+// ==========================================
+
+function renderProducts(products) {
 
   const productsContainer = document.querySelector(".products");
 
-  if(!productsContainer) return;
+  if (!productsContainer) return;
 
   productsContainer.innerHTML = "";
 
@@ -291,7 +364,7 @@ function renderProducts(products){
 
     card.classList.add("card");
 
-    if(currentLayout === "grid"){
+    if (currentLayout === "grid") {
       card.classList.add("card-square");
     }
 
@@ -302,7 +375,7 @@ function renderProducts(products){
     card.style.opacity = "1";
     card.style.transform = "translateX(0)";
 
-    if(currentLayout === "grid"){
+    if (currentLayout === "grid") {
 
       card.innerHTML = `
         <div class="square-image">
@@ -323,7 +396,7 @@ function renderProducts(products){
         </div>
       `;
 
-    }else{
+    } else {
 
       card.innerHTML = `
         <div class="left">
@@ -343,7 +416,7 @@ function renderProducts(products){
 
     fragment.appendChild(card);
 
-    if(!isMobile && !prefersReducedMotion && currentLayout === "list"){
+    if (!isMobile && !prefersReducedMotion && currentLayout === "list") {
 
       card.addEventListener("mousemove", (e) => {
         const rect = card.getBoundingClientRect();
@@ -372,8 +445,8 @@ function renderProducts(products){
       });
     }
 
-    card.addEventListener("click", function(e){
-      if(prefersReducedMotion) return;
+    card.addEventListener("click", function(e) {
+      if (prefersReducedMotion) return;
 
       const ripple = document.createElement("span");
       ripple.classList.add("ripple");
@@ -392,6 +465,33 @@ function renderProducts(products){
 
   productsContainer.appendChild(fragment);
 }
+
+
+// ==========================================
+// ATUALIZA CONTADOR DE PRODUTOS
+// ==========================================
+
+async function updateProductCounter(total) {
+  const counterEl = document.getElementById('productCounter');
+  if (!counterEl) return;
+
+  try {
+    if (total !== undefined) {
+      counterEl.textContent = `${total} novos produtos adicionados`;
+    } else {
+      const snap = await getDocs(collection(db, 'products'));
+      counterEl.textContent = `${snap.size} novos produtos adicionados`;
+    }
+  } catch (error) {
+    console.error('Erro ao buscar contador:', error);
+    counterEl.textContent = 'Carregando produtos...';
+  }
+}
+
+
+// ==========================================
+// INICIA O CARREGAMENTO
+// ==========================================
 
 loadProducts();
 
@@ -443,7 +543,7 @@ document.head.appendChild(rippleStyle);
 // GLOW MOUSE - DESKTOP ONLY
 // ==========================================
 
-if(!isMobile && !prefersReducedMotion){
+if (!isMobile && !prefersReducedMotion) {
 
   const glow = document.createElement("div");
   glow.classList.add("mouse-glow");
@@ -452,7 +552,7 @@ if(!isMobile && !prefersReducedMotion){
   let glowTicking = false;
 
   document.addEventListener("mousemove", (e) => {
-    if(glowTicking) return;
+    if (glowTicking) return;
 
     glowTicking = true;
 
@@ -496,16 +596,16 @@ let deferredPrompt = null;
 
 const installBtn = document.getElementById("installBtn");
 
-function isIOS(){
+function isIOS() {
   return /iphone|ipad|ipod/i.test(window.navigator.userAgent);
 }
 
-function isStandalone(){
+function isStandalone() {
   return window.matchMedia("(display-mode: standalone)").matches ||
-         window.navigator.standalone === true;
+    window.navigator.standalone === true;
 }
 
-if(installBtn){
+if (installBtn) {
 
   installBtn.style.display = "none";
 
@@ -514,23 +614,23 @@ if(installBtn){
 
     deferredPrompt = e;
 
-    if(!isStandalone()){
+    if (!isStandalone()) {
       installBtn.style.display = "flex";
     }
   });
 
-  if(isIOS() && !isStandalone()){
+  if (isIOS() && !isStandalone()) {
     installBtn.style.display = "flex";
   }
 
   installBtn.addEventListener("click", async () => {
 
-    if(isIOS()){
+    if (isIOS()) {
       alert("Para instalar no iPhone: toque em Compartilhar e depois em Adicionar à Tela de Início.");
       return;
     }
 
-    if(!deferredPrompt){
+    if (!deferredPrompt) {
       alert("Se o botão de instalar não aparecer, abra o menu do navegador e toque em Instalar app.");
       return;
     }
@@ -539,7 +639,7 @@ if(installBtn){
 
     const choiceResult = await deferredPrompt.userChoice;
 
-    if(choiceResult.outcome === "accepted"){
+    if (choiceResult.outcome === "accepted") {
       installBtn.style.display = "none";
     }
 
@@ -552,39 +652,22 @@ if(installBtn){
   });
 }
 
-// Atualiza o contador de produtos
-async function updateProductCounter() {
-  const counterEl = document.getElementById('productCounter');
-  if (!counterEl) return;
-
-  try {
-    const snap = await getDocs(collection(db, 'products'));
-    const total = snap.size;
-    counterEl.textContent = `${total} novos produtos adicionados`;
-  } catch (error) {
-    console.error('Erro ao buscar contador:', error);
-    counterEl.textContent = 'Carregando produtos...';
-  }
-}
-
-// Chame essa função depois de carregar os produtos
-updateProductCounter();
 
 // ==========================================
 // BLOQUEAR ZOOM DESKTOP
 // ==========================================
 
 document.addEventListener("wheel", (e) => {
-  if(e.ctrlKey || e.metaKey){
+  if (e.ctrlKey || e.metaKey) {
     e.preventDefault();
   }
-}, { passive:false });
+}, { passive: false });
 
 document.addEventListener("keydown", (e) => {
 
   const blockedKeys = ["+", "-", "=", "0"];
 
-  if((e.ctrlKey || e.metaKey) && blockedKeys.includes(e.key)){
+  if ((e.ctrlKey || e.metaKey) && blockedKeys.includes(e.key)) {
     e.preventDefault();
   }
 
@@ -617,16 +700,17 @@ let lastTouchEnd = 0;
 document.addEventListener("touchend", (e) => {
   const now = Date.now();
 
-  if(now - lastTouchEnd <= 300){
+  if (now - lastTouchEnd <= 300) {
     e.preventDefault();
   }
 
   lastTouchEnd = now;
-}, { passive:false });
+}, { passive: false });
 
 
 // ==========================================
 // FINAL
 // ==========================================
 
-console.log("LURE STORE ATIVO 🚀");
+console.log("🚀 LURE STORE ATIVO");
+console.log(`📱 Dispositivo: ${isMobile ? 'MOBILE' : 'DESKTOP'}`);

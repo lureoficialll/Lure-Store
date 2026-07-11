@@ -1497,53 +1497,67 @@
       showToast("Produto aberto para edição.");
     }
 
-    async function saveProduct() {
-      const addBtn = document.getElementById("addBtn");
-      const name = document.getElementById("name").value.trim();
-      const price = document.getElementById("price").value.trim();
-      const image = document.getElementById("image").value.trim();
-      const link = document.getElementById("link").value.trim();
+    async function saveProduct(){
+  const addBtn = document.getElementById("addBtn");
 
-      if (!name || !price) {
-        showToast("Preencha nome e preço.");
-        return;
-      }
+  const name = document.getElementById("name").value.trim();
+  const price = document.getElementById("price").value.trim();
+  const image = document.getElementById("image").value.trim();
+  const link = document.getElementById("link").value.trim();
 
-      addBtn.disabled = true;
-      addBtn.textContent = editingProductId ? "Salvando..." : "Adicionando...";
+  if(!name || !price){
+    showToast("Preencha nome e preço.");
+    return;
+  }
 
-      try {
-        if (editingProductId) {
-          await updateDoc(doc(db, "products", editingProductId), {
-            name,
-            price,
-            image,
-            link,
-            updatedAt: Date.now()
-          });
-          showToast("Produto atualizado.");
-          editingProductId = null;
-        } else {
-          await addDoc(collection(db, "products"), {
-            name,
-            price,
-            image,
-            link,
-            createdAt: Date.now()
-          });
-          showToast("Produto adicionado.");
-        }
-        await loadProducts();
-        clearProductForm();
-        updateFormMode();
-      } catch (error) {
-        console.error(error);
-        showToast(editingProductId ? "Erro ao salvar edição." : "Erro ao adicionar.");
-      }
+  addBtn.disabled = true;
+  addBtn.textContent = editingProductId ? "Salvando..." : "Adicionando...";
 
-      addBtn.disabled = false;
-      updateFormMode();
+  try{
+    // Obtém o usuário atual
+    const user = auth.currentUser;
+    if (!user) {
+      showToast("Você precisa estar logado.");
+      return;
     }
+
+    if(editingProductId){
+      await updateDoc(doc(db,"products",editingProductId),{
+        name,
+        price,
+        image,
+        link,
+        updatedAt: Date.now(),
+        updatedBy: user.email // adiciona quem editou
+      });
+
+      showToast("Produto atualizado.");
+      editingProductId = null;
+    }else{
+      await addDoc(collection(db,"products"),{
+        name,
+        price,
+        image,
+        link,
+        createdAt: Date.now(),
+        createdBy: user.email // adiciona quem criou
+      });
+
+      showToast("Produto adicionado.");
+    }
+
+    await loadProducts();
+    clearProductForm();
+    updateFormMode();
+
+  }catch(error){
+    console.error(error);
+    showToast(editingProductId ? "Erro ao salvar edição." : "Erro ao adicionar.");
+  }
+
+  addBtn.disabled = false;
+  updateFormMode();
+}
 
     async function loadProducts() {
       try {
@@ -1610,23 +1624,33 @@
         };
 
         div.querySelector(".delete").onclick = async () => {
-          const confirmDelete = confirm(`Excluir "${name}"?`);
-          if (!confirmDelete) return;
+  const confirmDelete = confirm(`Excluir "${name}"?`);
+  if(!confirmDelete) return;
 
-          try {
-            await deleteDoc(doc(db, "products", p.id));
-            if (editingProductId === p.id) {
-              editingProductId = null;
-              clearProductForm();
-              updateFormMode();
-            }
-            showToast("Produto removido.");
-            await loadProducts();
-          } catch (error) {
-            console.error(error);
-            showToast("Erro ao remover.");
-          }
-        };
+  try{
+    // Obtém o usuário atual
+    const user = auth.currentUser;
+    if (!user) {
+      showToast("Você precisa estar logado.");
+      return;
+    }
+
+    await deleteDoc(doc(db,"products",p.id));
+
+    if(editingProductId === p.id){
+      editingProductId = null;
+      clearProductForm();
+      updateFormMode();
+    }
+
+    showToast("Produto removido.");
+    await loadProducts();
+
+  }catch(error){
+    console.error(error);
+    showToast("Erro ao remover.");
+  }
+};
 
         productsContainer.appendChild(div);
       });

@@ -1201,3 +1201,224 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* ============================================================
+   BOTÕES SOCIAIS MAIS CURTOS
+   ============================================================ */
+
+.hero-btn-short {
+  height: 36px !important;
+  padding: 0 14px !important;
+  font-size: 12px !important;
+  border-radius: 30px !important;
+  gap: 6px !important;
+}
+
+.hero-btn-short .hero-btn-icon {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.hero-btn-short .hero-btn-text {
+  font-size: 12px;
+}
+
+/* ============================================================
+   PRODUTO EM DESTAQUE NO HERO
+   ============================================================ */
+
+.hero-product {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+  padding: 16px 22px;
+  margin: 12px auto 18px;
+  max-width: 380px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  transition: 0.3s;
+}
+
+.hero-product:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.10);
+}
+
+.hero-product-img {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  object-fit: cover;
+  background: #f0f0f0;
+  flex-shrink: 0;
+}
+
+.hero-product-info {
+  text-align: left;
+  flex: 1;
+  min-width: 0;
+}
+
+.hero-product-info h4 {
+  font-size: 14px;
+  font-weight: 800;
+  color: #111;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hero-product-info p {
+  font-size: 16px;
+  font-weight: 900;
+  color: #222;
+  margin-top: 2px;
+}
+
+.hero-product-link {
+  background: #222;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.hero-product-link:hover {
+  background: #111;
+  transform: scale(1.02);
+}
+
+/* ============================================================
+   INSTAGRAM BADGE COM BOLINHA PRETA
+   ============================================================ */
+
+.nav-instagram {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: 0.25s;
+  text-decoration: none;
+}
+
+.nav-instagram:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.instagram-badge {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.instagram-badge .nav-icon {
+  width: 22px;
+  height: 22px;
+  filter: brightness(0);
+}
+
+.badge-dot {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  width: 10px;
+  height: 10px;
+  background: #111;
+  border-radius: 50%;
+  border: 2px solid #f5f5f5;
+  display: block;
+}
+
+/* ============================================================
+   RESPONSIVO – BOTÕES SOCIAIS NO MOBILE
+   ============================================================ */
+
+@media (max-width: 760px) {
+  .hero-btn-short {
+    height: 34px !important;
+    padding: 0 12px !important;
+    font-size: 11px !important;
+  }
+
+  .hero-btn-short .hero-btn-icon {
+    width: 14px !important;
+    height: 14px !important;
+  }
+
+  .hero-product {
+    padding: 12px 16px;
+    max-width: 100%;
+    margin: 10px 12px 14px;
+  }
+
+  .hero-product-img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .hero-product-info h4 {
+    font-size: 13px;
+  }
+
+  .hero-product-info p {
+    font-size: 14px;
+  }
+
+  .hero-product-link {
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+
+  .badge-dot {
+    width: 8px;
+    height: 8px;
+    top: -3px;
+    right: -4px;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-btn-short {
+    height: 30px !important;
+    padding: 0 10px !important;
+    font-size: 10px !important;
+  }
+
+  .hero-btn-short .hero-btn-icon {
+    width: 13px !important;
+    height: 13px !important;
+  }
+
+  .hero-product {
+    padding: 10px 12px;
+  }
+
+  .hero-product-img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .hero-product-info h4 {
+    font-size: 12px;
+  }
+
+  .hero-product-info p {
+    font-size: 13px;
+  }
+
+  .hero-product-link {
+    font-size: 10px;
+    padding: 5px 10px;
+  }
+}

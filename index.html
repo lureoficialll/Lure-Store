@@ -42,94 +42,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    /* ===== AJUSTES DO HERO (sem imagem, botões na lateral) ===== */
-    .hero-card {
-      display: grid;
-      grid-template-columns: 1fr minmax(140px, 190px);
-      gap: clamp(20px, 3vw, 38px);
-      align-items: center;
-      padding: 10px 0 28px;
-      margin-bottom: 18px;
-    }
-
-    .hero-left {
-      display: none; /* removemos a imagem */
-    }
-
-    .hero-center {
-      position: relative;
-      z-index: 2;
-      min-width: 0;
-    }
-
-    .hero-center h1 {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: clamp(34px, 4.1vw, 48px);
-      line-height: 1.05;
-      font-weight: 900;
-      letter-spacing: -2px;
-      margin-bottom: 12px;
-      overflow-wrap: anywhere;
-      color: #111;
-    }
-
-    .verified-icon {
-      width: 28px;
-      height: 28px;
-      object-fit: contain;
-      filter: brightness(0);
-      flex-shrink: 0;
-    }
-
-    .subtitle {
-      color: #555;
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    .bio {
-      display: none; /* removemos o texto "Os melhores..." */
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-top: 0;
-      width: 100%;
-    }
-
-    .hero-btn {
-      width: 100%;
-      justify-content: center;
-      padding: 0 12px;
-      height: 46px;
-      border-radius: 14px;
-      border: 1px solid rgba(0, 0, 0, .15);
-      background: #fff;
-      color: #111;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      font-weight: 800;
-      transition: .25s;
-    }
-
-    .hero-btn:hover {
-      transform: translateY(-2px);
-      background: #f0f0f0;
-    }
-
-    .hero-btn-icon {
-      width: 19px;
-      height: 19px;
-      object-fit: contain;
-      filter: brightness(0);
-    }
+    /* ============================================================
+       ESTILOS GLOBAIS (funcionam para ambos)
+       ============================================================ */
 
     /* ===== VERIFICADO NO CABEÇALHO ===== */
     .logo-text {
@@ -222,24 +137,379 @@
       transform: translateY(-2px);
     }
 
-    /* ===== RESPONSIVO PARA O HERO ===== */
-    @media (max-width: 760px) {
+    /* ============================================================
+       ESTILOS DESKTOP (tela > 768px)
+       ============================================================ */
+
+    @media (min-width: 769px) {
+
+      /* Hero com produto em destaque */
       .hero-card {
-        grid-template-columns: 1fr;
-        text-align: center;
+        display: grid;
+        grid-template-columns: 1fr minmax(140px, 190px);
+        gap: clamp(20px, 3vw, 38px);
+        align-items: center;
+        padding: 10px 0 28px;
+        margin-bottom: 18px;
+      }
+
+      .hero-left {
+        display: none;
+      }
+
+      .hero-center h1 {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: clamp(34px, 4.1vw, 48px);
+        line-height: 1.05;
+        font-weight: 900;
+        letter-spacing: -2px;
+        margin-bottom: 12px;
+        overflow-wrap: anywhere;
+        color: #111;
+      }
+
+      .verified-icon {
+        width: 28px;
+        height: 28px;
+        object-fit: contain;
+        filter: brightness(0);
+        flex-shrink: 0;
+      }
+
+      .subtitle {
+        color: #555;
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+
+      .bio {
+        display: none;
       }
 
       .hero-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 0;
+        width: 100%;
+      }
+
+      .hero-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 0 12px;
+        height: 46px;
+        border-radius: 14px;
+        border: 1px solid rgba(0, 0, 0, .15);
+        background: #fff;
+        color: #111;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        font-weight: 800;
+        transition: .25s;
+      }
+
+      .hero-btn:hover {
+        transform: translateY(-2px);
+        background: #f0f0f0;
+      }
+
+      .hero-btn-icon {
+        width: 19px;
+        height: 19px;
+        object-fit: contain;
+        filter: brightness(0);
+      }
+
+      /* Produto em destaque no hero */
+      .hero-product-wrapper {
+        margin: 16px 0 0;
+      }
+
+      .hero-product {
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 20px;
+        padding: 14px 18px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+        transition: 0.3s;
+        text-decoration: none;
+        color: #111;
+        max-width: 400px;
+      }
+
+      .hero-product:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.10);
+      }
+
+      .hero-product-img {
+        width: 52px;
+        height: 52px;
+        border-radius: 12px;
+        object-fit: cover;
+        background: #f0f0f0;
+        flex-shrink: 0;
+      }
+
+      .hero-product-info {
+        text-align: left;
+        flex: 1;
+        min-width: 0;
+      }
+
+      .hero-product-info h4 {
+        font-size: 14px;
+        font-weight: 800;
+        color: #111;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .hero-product-info p {
+        font-size: 16px;
+        font-weight: 900;
+        color: #222;
+        margin-top: 2px;
+      }
+
+      .hero-product-link {
+        background: #222;
+        color: #fff;
+        padding: 6px 14px;
+        border-radius: 30px;
+        font-size: 12px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: 0.2s;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      .hero-product-link:hover {
+        background: #111;
+        transform: scale(1.02);
+      }
+
+      /* Botão Instagram com bolinha */
+      .nav-instagram {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        transition: 0.25s;
+        text-decoration: none;
+      }
+
+      .nav-instagram:hover {
+        background: rgba(0, 0, 0, 0.05);
+      }
+
+      .instagram-badge {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .instagram-badge .nav-icon {
+        width: 22px;
+        height: 22px;
+        filter: brightness(0);
+      }
+
+      .badge-dot {
+        position: absolute;
+        top: -4px;
+        right: -6px;
+        width: 10px;
+        height: 10px;
+        background: #111;
+        border-radius: 50%;
+        border: 2px solid #f5f5f5;
+        display: block;
+      }
+    }
+
+    /* ============================================================
+       ESTILOS MOBILE (tela <= 768px)
+       ============================================================ */
+
+    @media (max-width: 768px) {
+
+      .hero-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 10px 8px 18px;
+        margin-bottom: 18px;
+      }
+
+      .hero-left {
+        display: none;
+      }
+
+      .hero-center {
+        width: 100%;
+      }
+
+      .hero-center h1 {
+        justify-content: center;
+        font-size: 28px;
+        flex-wrap: wrap;
+      }
+
+      .verified-icon {
+        width: 24px;
+        height: 24px;
+      }
+
+      .subtitle {
+        font-size: 18px;
+        margin-bottom: 6px;
+      }
+
+      .bio {
+        display: none;
+      }
+
+      .hero-actions {
+        display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
-        margin-top: 16px;
+        gap: 10px;
+        margin-top: 12px;
       }
 
       .hero-btn {
         width: auto;
-        padding: 0 18px;
-        height: 44px;
+        padding: 0 16px;
+        height: 40px;
+        font-size: 13px;
+        border-radius: 30px;
+      }
+
+      .hero-btn-icon {
+        width: 17px;
+        height: 17px;
+      }
+
+      /* Remove o produto em destaque no mobile */
+      .hero-product-wrapper {
+        display: none;
+      }
+
+      /* Ajuste da bolinha no Instagram */
+      .badge-dot {
+        width: 8px;
+        height: 8px;
+        top: -3px;
+        right: -4px;
+      }
+
+      .instagram-badge .nav-icon {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    /* ============================================================
+       ESTILOS COMPARTILHADOS
+       ============================================================ */
+
+    .hero-product-wrapper {
+      margin: 12px 0 0;
+    }
+
+    .product-counter {
+      font-size: 14px;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 6px;
+    }
+
+    /* Ajuste do cabeçalho para ambos */
+    .logo-text h2 {
+      font-size: 21px;
+      letter-spacing: .5px;
+      font-weight: 900;
+      white-space: nowrap;
+      color: #111;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .logo-text p {
+      font-size: 11px;
+      color: #777;
+      letter-spacing: 4px;
+      font-weight: 800;
+      margin-left: 4px;
+    }
+
+    .desktop-nav a.nav-instagram {
+      font-size: 0;
+      gap: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: transparent;
+      justify-content: center;
+      transition: .25s;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .desktop-nav a.nav-instagram:hover {
+      background: rgba(0, 0, 0, .05);
+    }
+
+    .desktop-nav a.nav-instagram img {
+      width: 22px;
+      height: 22px;
+      filter: brightness(0);
+    }
+
+    /* Responsivo do cabeçalho */
+    @media (max-width: 768px) {
+      .logo-text h2 {
+        font-size: 18px;
+      }
+
+      .logo-text p {
+        font-size: 10px;
+        letter-spacing: 3px;
+      }
+
+      .logo-text .verified-icon-small {
+        width: 16px;
+        height: 16px;
+      }
+
+      .desktop-nav a.nav-instagram {
+        width: 32px;
+        height: 32px;
+      }
+
+      .desktop-nav a.nav-instagram img {
+        width: 18px;
+        height: 18px;
       }
     }
   </style>
@@ -269,7 +539,7 @@
 
   <main class="container">
 
-    <!-- Cabeçalho -->
+    <!-- ===== CABEÇALHO ===== -->
     <header class="topbar">
 
       <div class="logo">
@@ -279,13 +549,15 @@
         </div>
 
         <div class="logo-text">
-          <h2>LURE STORE</h2>
-          <img
-            src="Icones/Icon/badge-check.svg"
-            alt="Verificado"
-            class="verified-icon-small"
-            draggable="false"
-          >
+          <h2>
+            LURE STORE
+            <img
+              src="Icones/Icon/badge-check.svg"
+              alt="Verificado"
+              class="verified-icon-small"
+              draggable="false"
+            >
+          </h2>
           <p>OFICIAL</p>
         </div>
 
@@ -303,8 +575,22 @@
           <img src="Icones/Icon/info.svg" alt="" class="nav-icon" draggable="false">
           Contato
         </a>
-        <a href="https://www.instagram.com/lurestore/" target="_blank" rel="noopener" aria-label="Instagram">
-          <img src="Icones/Icon/instagram.svg" alt="Instagram" class="nav-icon" draggable="false" style="width:20px; height:20px;">
+        <a
+          href="https://www.instagram.com/lurestore/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="nav-instagram"
+          aria-label="Instagram"
+        >
+          <span class="instagram-badge">
+            <img
+              src="Icones/Icon/instagram.svg"
+              alt="Instagram"
+              class="nav-icon"
+              draggable="false"
+            >
+            <span class="badge-dot"></span>
+          </span>
         </a>
       </nav>
 
@@ -320,7 +606,7 @@
 
     </header>
 
-    <!-- Hero (sem imagem e sem bio) -->
+    <!-- ===== HERO ===== -->
     <section class="hero-card" id="inicio">
 
       <div class="hero-center">
@@ -339,7 +625,17 @@
           Ofertas e Achadinhos
         </p>
 
-        <!-- Botões na lateral direita (serão posicionados pela grid) -->
+        <!-- Contador de produtos -->
+        <p class="product-counter" id="productCounter">
+          Carregando produtos...
+        </p>
+
+        <!-- Produto em destaque (aparece apenas no Desktop) -->
+        <div class="hero-product-wrapper" id="heroProduct">
+          <!-- Preenchido pelo JavaScript -->
+        </div>
+
+        <!-- Botões sociais -->
         <div class="hero-actions">
 
           <a
@@ -357,13 +653,26 @@
             Instagram
           </a>
 
-      </div>
+          <a
+            class="hero-btn"
+            href="mailto:lureoficialll@gmail.com">
 
-      <!-- A terceira coluna da grid é ocupada pelos botões via .hero-actions, que estão dentro do .hero-center, mas com display:grid eles ficam ao lado -->
+            <img
+              src="Icones/Icon/mail.svg"
+              alt=""
+              class="hero-btn-icon"
+              draggable="false">
+
+            E-mail
+          </a>
+
+        </div>
+
+      </div>
 
     </section>
 
-    <!-- Produtos -->
+    <!-- ===== PRODUTOS ===== -->
     <section class="products-section" id="ofertas">
 
       <div class="section-title premium-section-title">
@@ -410,7 +719,7 @@
 
     </section>
 
-    <!-- Banner do Instagram com a caixa (gift box) -->
+    <!-- ===== BANNER INSTAGRAM (com caixa) ===== -->
     <section class="instagram-banner" id="contato">
 
       <div class="gift-box">
@@ -453,7 +762,7 @@
 
     </section>
 
-    <!-- Rodapé -->
+    <!-- ===== RODAPÉ ===== -->
     <footer class="footer">
 
       <p>© 2026 Lure Store. Todos os direitos reservados.</p>
@@ -484,7 +793,7 @@
     </div>
   </div>
 
-  <!-- Scripts -->
+  <!-- ===== SCRIPTS ===== -->
   <script type="module" src="firebase.js"></script>
   <script type="module" src="script.js"></script>
 
@@ -594,5 +903,4 @@
   </script>
 
 </body>
-
 </html>
