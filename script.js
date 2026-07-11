@@ -552,6 +552,23 @@ if(installBtn){
   });
 }
 
+// Atualiza o contador de produtos
+async function updateProductCounter() {
+  const counterEl = document.getElementById('productCounter');
+  if (!counterEl) return;
+
+  try {
+    const snap = await getDocs(collection(db, 'products'));
+    const total = snap.size;
+    counterEl.textContent = `${total} novos produtos adicionados`;
+  } catch (error) {
+    console.error('Erro ao buscar contador:', error);
+    counterEl.textContent = 'Carregando produtos...';
+  }
+}
+
+// Chame essa função depois de carregar os produtos
+updateProductCounter();
 
 // ==========================================
 // BLOQUEAR ZOOM DESKTOP
