@@ -43,10 +43,9 @@
 
   <style>
     /* ============================================================
-       ESTILOS GLOBAIS (funcionam para ambos)
+       ESTILOS GLOBAIS
        ============================================================ */
 
-    /* ===== VERIFICADO NO CABEÇALHO ===== */
     .logo-text {
       display: flex;
       align-items: center;
@@ -138,23 +137,28 @@
     }
 
     /* ============================================================
-       ESTILOS DESKTOP (tela > 768px)
+       DESKTOP (tela > 768px)
        ============================================================ */
 
     @media (min-width: 769px) {
 
-      /* Hero com produto em destaque */
+      /* Hero com grid: conteúdo à esquerda, produto à direita */
       .hero-card {
         display: grid;
-        grid-template-columns: 1fr minmax(140px, 190px);
-        gap: clamp(20px, 3vw, 38px);
+        grid-template-columns: 1fr 280px;
+        gap: 40px;
         align-items: center;
         padding: 10px 0 28px;
         margin-bottom: 18px;
+        position: relative;
       }
 
       .hero-left {
         display: none;
+      }
+
+      .hero-center {
+        grid-column: 1;
       }
 
       .hero-center h1 {
@@ -189,29 +193,31 @@
         display: none;
       }
 
+      /* BOTÕES SOCIAIS MAIS CURTOS (linha) */
       .hero-actions {
         display: flex;
-        flex-direction: column;
-        gap: 12px;
-        margin-top: 0;
-        width: 100%;
+        flex-direction: row;
+        gap: 10px;
+        margin-top: 6px;
+        flex-wrap: wrap;
       }
 
       .hero-btn {
-        width: 100%;
-        justify-content: center;
-        padding: 0 12px;
-        height: 46px;
-        border-radius: 14px;
+        width: auto;
+        padding: 0 14px;
+        height: 38px;
+        border-radius: 30px;
         border: 1px solid rgba(0, 0, 0, .15);
         background: #fff;
         color: #111;
         text-decoration: none;
         display: flex;
         align-items: center;
-        gap: 9px;
-        font-weight: 800;
+        gap: 7px;
+        font-weight: 700;
+        font-size: 13px;
         transition: .25s;
+        white-space: nowrap;
       }
 
       .hero-btn:hover {
@@ -220,54 +226,62 @@
       }
 
       .hero-btn-icon {
-        width: 19px;
-        height: 19px;
+        width: 17px;
+        height: 17px;
         object-fit: contain;
         filter: brightness(0);
       }
 
-      /* Produto em destaque no hero */
+      /* PRODUTO EM DESTAQUE QUADRADO MAIOR À DIREITA */
       .hero-product-wrapper {
-        margin: 16px 0 0;
+        grid-column: 2;
+        grid-row: 1;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin: 0;
       }
 
       .hero-product {
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 0.95);
         border: 1px solid rgba(0, 0, 0, 0.08);
         border-radius: 20px;
-        padding: 14px 18px;
+        padding: 20px;
+        width: 280px;
+        height: 280px;
         display: flex;
+        flex-direction: column;
         align-items: center;
-        gap: 14px;
+        justify-content: center;
+        text-align: center;
         box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
         transition: 0.3s;
         text-decoration: none;
         color: #111;
-        max-width: 400px;
       }
 
       .hero-product:hover {
-        transform: translateY(-2px);
+        transform: translateY(-4px) scale(1.01);
         box-shadow: 0 12px 40px rgba(0, 0, 0, 0.10);
       }
 
       .hero-product-img {
-        width: 52px;
-        height: 52px;
-        border-radius: 12px;
+        width: 190px;
+        height: 190px;
+        border-radius: 16px;
         object-fit: cover;
         background: #f0f0f0;
         flex-shrink: 0;
+        margin-bottom: 10px;
       }
 
       .hero-product-info {
-        text-align: left;
-        flex: 1;
-        min-width: 0;
+        text-align: center;
+        width: 100%;
       }
 
       .hero-product-info h4 {
-        font-size: 14px;
+        font-size: 15px;
         font-weight: 800;
         color: #111;
         white-space: nowrap;
@@ -276,28 +290,14 @@
       }
 
       .hero-product-info p {
-        font-size: 16px;
+        font-size: 18px;
         font-weight: 900;
         color: #222;
         margin-top: 2px;
       }
 
       .hero-product-link {
-        background: #222;
-        color: #fff;
-        padding: 6px 14px;
-        border-radius: 30px;
-        font-size: 12px;
-        font-weight: 700;
-        text-decoration: none;
-        transition: 0.2s;
-        white-space: nowrap;
-        flex-shrink: 0;
-      }
-
-      .hero-product-link:hover {
-        background: #111;
-        transform: scale(1.02);
+        display: none;
       }
 
       /* Botão Instagram com bolinha */
@@ -344,7 +344,7 @@
     }
 
     /* ============================================================
-       ESTILOS MOBILE (tela <= 768px)
+       MOBILE (tela <= 768px)
        ============================================================ */
 
     @media (max-width: 768px) {
@@ -413,7 +413,6 @@
         display: none;
       }
 
-      /* Ajuste da bolinha no Instagram */
       .badge-dot {
         width: 8px;
         height: 8px;
@@ -432,7 +431,7 @@
        ============================================================ */
 
     .hero-product-wrapper {
-      margin: 12px 0 0;
+      margin: 0;
     }
 
     .product-counter {
@@ -442,7 +441,6 @@
       margin-bottom: 6px;
     }
 
-    /* Ajuste do cabeçalho para ambos */
     .logo-text h2 {
       font-size: 21px;
       letter-spacing: .5px;
@@ -486,7 +484,6 @@
       filter: brightness(0);
     }
 
-    /* Responsivo do cabeçalho */
     @media (max-width: 768px) {
       .logo-text h2 {
         font-size: 18px;
@@ -630,11 +627,6 @@
           Carregando produtos...
         </p>
 
-        <!-- Produto em destaque (aparece apenas no Desktop) -->
-        <div class="hero-product-wrapper" id="heroProduct">
-          <!-- Preenchido pelo JavaScript -->
-        </div>
-
         <!-- Botões sociais -->
         <div class="hero-actions">
 
@@ -668,6 +660,11 @@
 
         </div>
 
+      </div>
+
+      <!-- Produto em destaque (aparece apenas no Desktop) -->
+      <div class="hero-product-wrapper" id="heroProduct">
+        <!-- Preenchido pelo JavaScript -->
       </div>
 
     </section>
@@ -719,48 +716,36 @@
 
     </section>
 
-    <!-- ===== BANNER INSTAGRAM (com caixa) ===== -->
-    <section class="instagram-banner" id="contato">
+    <!-- ===== BANNER INSTAGRAM (sem caixa, menor) ===== -->
+<section class="instagram-banner" id="contato">
 
-      <div class="gift-box">
-        <img
-          src="Icones/Image/CAIXA.png"
-          alt=""
-          draggable="false"
-        >
-      </div>
+  <div class="instagram-banner-content" style="grid-column: 1 / -1; text-align: center;">
 
-      <div class="instagram-banner-content">
+    <h2>Novas ofertas todos os dias!</h2>
 
-        <h2>Novas ofertas todos os dias!</h2>
+    <p>
+      Siga a Lure Store no Instagram e não perca nenhuma promoção.
+    </p>
 
-        <p>
-          Siga a Lure Store no Instagram e não perca nenhuma promoção.
-        </p>
+    <a
+      href="https://www.instagram.com/lurestore/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="instagram-banner-btn">
 
-        <a
-          href="https://www.instagram.com/lurestore/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="instagram-banner-btn">
+      <img
+        src="Icones/Icon/instagram.svg"
+        alt=""
+        class="banner-btn-icon"
+        draggable="false"
+      >
 
-          <img
-            src="Icones/Icon/instagram.svg"
-            alt=""
-            class="banner-btn-icon"
-            draggable="false"
-          >
+      Seguir no Instagram
+    </a>
 
-          Seguir no Instagram
-        </a>
+  </div>
 
-      </div>
-
-      <div class="phone-preview">
-        @lurestore
-      </div>
-
-    </section>
+</section>
 
     <!-- ===== RODAPÉ ===== -->
     <footer class="footer">
@@ -903,4 +888,5 @@
   </script>
 
 </body>
+
 </html>

@@ -6,149 +6,149 @@ window.initZyqenStudio = function(products = []){
   let uploadedImageData = null;
   let lastGeneratedBlob = null;
 
- const templates = [
+  const templates = [
 
-  {
-    id:"varejao",
-    name:"MT Varejão Premium",
-    tag:"OFERTA DO DIA",
-    button:"COMPRAR AGORA"
-  },
+    {
+      id:"varejao",
+      name:"Lure Store Premium",
+      tag:"OFERTA DO DIA",
+      button:"COMPRAR AGORA"
+    },
 
-  {
-    id:"gold",
-    name:"Oferta Dourada",
-    tag:"SUPER OFERTA",
-    button:"GARANTIR OFERTA"
-  },
+    {
+      id:"gold",
+      name:"Oferta Dourada",
+      tag:"SUPER OFERTA",
+      button:"GARANTIR OFERTA"
+    },
 
-  {
-    id:"black",
-    name:"Black Friday",
-    tag:"BLACK FRIDAY",
-    button:"PEGAR OFERTA"
-  },
+    {
+      id:"black",
+      name:"Black Friday",
+      tag:"BLACK FRIDAY",
+      button:"PEGAR OFERTA"
+    },
 
-  {
-    id:"amazon",
-    name:"Amazon Style",
-    tag:"PRODUTO RECOMENDADO",
-    button:"VER AGORA"
-  },
+    {
+      id:"amazon",
+      name:"Amazon Style",
+      tag:"PRODUTO RECOMENDADO",
+      button:"VER AGORA"
+    },
 
-  {
-    id:"shopee",
-    name:"Shopee Style",
-    tag:"SUPER OFERTA",
-    button:"COMPRAR AGORA"
-  },
+    {
+      id:"shopee",
+      name:"Shopee Style",
+      tag:"SUPER OFERTA",
+      button:"COMPRAR AGORA"
+    },
 
-  {
-    id:"mercadolivre",
-    name:"Mercado Livre Style",
-    tag:"OFERTA IMPERDÍVEL",
-    button:"VER OFERTA"
-  },
+    {
+      id:"mercadolivre",
+      name:"Mercado Livre Style",
+      tag:"OFERTA IMPERDÍVEL",
+      button:"VER OFERTA"
+    },
 
-  {
-    id:"oferta",
-    name:"Oferta Relâmpago",
-    tag:"PROMOÇÃO LIMITADA",
-    button:"APROVEITAR"
-  },
+    {
+      id:"oferta",
+      name:"Oferta Relâmpago",
+      tag:"PROMOÇÃO LIMITADA",
+      button:"APROVEITAR"
+    },
 
-  {
-    id:"desconto",
-    name:"Mega Desconto",
-    tag:"ATÉ 70% OFF",
-    button:"COMPRAR"
-  },
+    {
+      id:"desconto",
+      name:"Mega Desconto",
+      tag:"ATÉ 70% OFF",
+      button:"COMPRAR"
+    },
 
-  {
-    id:"viral",
-    name:"Produto Viral",
-    tag:"MAIS VENDIDO",
-    button:"QUERO ESSE"
-  },
+    {
+      id:"viral",
+      name:"Produto Viral",
+      tag:"MAIS VENDIDO",
+      button:"QUERO ESSE"
+    },
 
-  {
-    id:"luxo",
-    name:"Luxo Premium",
-    tag:"SELEÇÃO PREMIUM",
-    button:"COMPRAR"
-  },
+    {
+      id:"luxo",
+      name:"Luxo Premium",
+      tag:"SELEÇÃO PREMIUM",
+      button:"COMPRAR"
+    },
 
-  {
-    id:"clean",
-    name:"Clean Branco",
-    tag:"OFERTA ESPECIAL",
-    button:"VER PRODUTO"
-  },
+    {
+      id:"clean",
+      name:"Clean Branco",
+      tag:"OFERTA ESPECIAL",
+      button:"VER PRODUTO"
+    },
 
-  {
-    id:"tech",
-    name:"Produto Tech",
-    tag:"TECNOLOGIA",
-    button:"COMPRAR"
-  },
+    {
+      id:"tech",
+      name:"Produto Tech",
+      tag:"TECNOLOGIA",
+      button:"COMPRAR"
+    },
 
-  {
-    id:"casa",
-    name:"Casa & Cozinha",
-    tag:"ACHADINHO DE CASA",
-    button:"GARANTIR"
-  },
+    {
+      id:"casa",
+      name:"Casa & Cozinha",
+      tag:"ACHADINHO DE CASA",
+      button:"GARANTIR"
+    },
 
-  {
-    id:"fitness",
-    name:"Fitness",
-    tag:"VIDA SAUDÁVEL",
-    button:"COMPRAR"
-  },
+    {
+      id:"fitness",
+      name:"Fitness",
+      tag:"VIDA SAUDÁVEL",
+      button:"COMPRAR"
+    },
 
-  {
-    id:"beleza",
-    name:"Beleza",
-    tag:"CUIDADOS PESSOAIS",
-    button:"VER OFERTA"
-  },
+    {
+      id:"beleza",
+      name:"Beleza",
+      tag:"CUIDADOS PESSOAIS",
+      button:"VER OFERTA"
+    },
 
-  {
-    id:"infantil",
-    name:"Infantil",
-    tag:"PARA CRIANÇAS",
-    button:"COMPRAR"
-  },
+    {
+      id:"infantil",
+      name:"Infantil",
+      tag:"PARA CRIANÇAS",
+      button:"COMPRAR"
+    },
 
-  {
-    id:"natal",
-    name:"Natal",
-    tag:"PRESENTE ESPECIAL",
-    button:"GARANTIR"
-  },
+    {
+      id:"natal",
+      name:"Natal",
+      tag:"PRESENTE ESPECIAL",
+      button:"GARANTIR"
+    },
 
-  {
-    id:"urgencia",
-    name:"Últimas Unidades",
-    tag:"ESTOQUE LIMITADO",
-    button:"APROVEITAR"
-  },
+    {
+      id:"urgencia",
+      name:"Últimas Unidades",
+      tag:"ESTOQUE LIMITADO",
+      button:"APROVEITAR"
+    },
 
-  {
-    id:"instagram",
-    name:"Instagram Oferta",
-    tag:"ACHADINHO DO INSTAGRAM",
-    button:"VER AGORA"
-  },
+    {
+      id:"instagram",
+      name:"Instagram Oferta",
+      tag:"ACHADINHO DO INSTAGRAM",
+      button:"VER AGORA"
+    },
 
-  {
-    id:"whatsapp",
-    name:"WhatsApp Promo",
-    tag:"OFERTA EXCLUSIVA",
-    button:"CONFERIR"
-  }
+    {
+      id:"whatsapp",
+      name:"WhatsApp Promo",
+      tag:"OFERTA EXCLUSIVA",
+      button:"CONFERIR"
+    }
 
-];
+  ];
 
   root.innerHTML = `
     <div class="studio-wrap">
@@ -549,16 +549,16 @@ window.initZyqenStudio = function(products = []){
     const link = productLinkInput.value.trim();
     const template = getTemplate(templateInput.value);
 
-  const caption = `🔥 ${template.tag}
+    const caption = `🔥 ${template.tag}
 
 ${name}
 
 Por apenas ${price}
 
-Confira agora no MT Varejão OFC.
+Confira agora na Lure Store.
 ${link ? link : "Link na bio."}`;
 
-captionInput.value = caption;
+    captionInput.value = caption;
   }
 
   async function renderStudio(){
@@ -589,7 +589,7 @@ captionInput.value = caption;
 
     ctx.fillStyle = colors.title;
     ctx.font = "900 56px Poppins, Arial";
-    ctx.fillText("MT VAREJÃO",90,145);
+    ctx.fillText("LURE STORE",90,145);  // ← ALTERADO
 
     ctx.fillStyle = colors.accent;
     ctx.font = "900 38px Poppins, Arial";
@@ -727,7 +727,7 @@ captionInput.value = caption;
 
       const link = document.createElement("a");
       link.href = url;
-      link.download = "mt-varejao-anuncio.png";
+      link.download = "lure-store-anuncio.png";  // ← ALTERADO
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);

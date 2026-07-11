@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Lure Admin</title>
   <link rel="manifest" href="manifest-admin.json">
-  <link rel="icon" type="image/png" href="Icones/Image/MTAdmin.png">
-  <link rel="apple-touch-icon" href="Icones/Image/MTAdmin.png">
+  <link rel="icon" type="image/png" href="Icones/Image/LAroxo.png">
+  <link rel="apple-touch-icon" href="Icones/Image/LAroxo.png">
   <meta name="theme-color" content="#0a0a0a">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -102,7 +102,7 @@
   <div class="bg"></div>
   <div class="login-card">
     <div class="logo">
-      <img src="Icones/Image/MTAdmin.png" alt="Lure Admin" draggable="false">
+      <img src="Icones/Image/LAroxo.png" alt="Lure Admin" draggable="false">
     </div>
     <div class="admin-badge">Painel Administrativo</div>
     <h1>Lure Admin</h1>
@@ -117,8 +117,7 @@
     import {
       signInWithPopup,
       onAuthStateChanged,
-      signOut,
-      GoogleAuthProvider
+      signOut
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
     const loginBtn = document.getElementById("loginBtn");
@@ -156,7 +155,6 @@
 
       } catch (error) {
         console.error("Erro detalhado no login:", error);
-        // Mostra mensagem de erro mais específica
         let msg = "Erro ao entrar: ";
         if (error.code) {
           switch (error.code) {

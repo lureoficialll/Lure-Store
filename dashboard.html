@@ -17,9 +17,9 @@
 
   <link rel="manifest" href="manifest-admin.json">
 
-  <!-- Ícones – mantenha os mesmos arquivos ou atualize -->
-  <link rel="icon" type="image/png" href="Icones/Image/MTADMIN2.png">
-  <link rel="apple-touch-icon" href="Icones/Image/MTADMIN2.png">
+  <!-- Ícones atualizados para LAroxo.png -->
+  <link rel="icon" type="image/png" href="Icones/Image/LAroxo.png">
+  <link rel="apple-touch-icon" href="Icones/Image/LAroxo.png">
 
   <meta name="theme-color" content="#0a0a0a">
   <meta name="mobile-web-app-capable" content="yes">
@@ -1064,7 +1064,7 @@
       <div class="drawer-head">
         <div class="brand" style="margin-bottom:0;">
           <div class="brand-icon">
-            <img src="Icones/Image/MTADMIN2.png" alt="Lure Admin" draggable="false">
+            <img src="Icones/Image/LAroxo.png" alt="Lure Admin" draggable="false">
           </div>
           <div>
             <h1>LURE ADMIN</h1>
@@ -1099,7 +1099,7 @@
       <div>
         <div class="brand">
           <div class="brand-icon">
-            <img src="Icones/Image/MTADMIN2.png" alt="Lure Admin" draggable="false">
+            <img src="Icones/Image/LAroxo.png" alt="Lure Admin" draggable="false">
           </div>
           <div>
             <h1>LURE ADMIN</h1>
@@ -1120,7 +1120,7 @@
         <div class="admin-box">
           <div class="admin-name">
             <div class="admin-mini">
-              <img src="Icones/Image/MTADMIN2.png" alt="Lure" draggable="false">
+              <img src="Icones/Image/LAroxo.png" alt="Lure" draggable="false">
             </div>
             <div>Lure Admin</div>
           </div>
@@ -1144,11 +1144,11 @@
           <input class="search" id="searchInput" placeholder="Buscar produto...">
 
           <button class="install-btn" id="installBtn" type="button">
-            <img src="Icones/Icon/download.svg" alt="" draggable="false">
+            <img src="Icones/Icon/install.svg" alt="" draggable="false">
           </button>
 
           <div class="brand-icon" style="width:50px;height:50px;border-radius:16px;">
-            <img src="Icones/Image/MTADMIN2.png" alt="Lure Admin" draggable="false">
+            <img src="Icones/Image/LAroxo.png" alt="Lure Admin" draggable="false">
           </div>
         </div>
       </div>
@@ -1497,67 +1497,64 @@
       showToast("Produto aberto para edição.");
     }
 
-    async function saveProduct(){
-  const addBtn = document.getElementById("addBtn");
+    async function saveProduct() {
+      const addBtn = document.getElementById("addBtn");
 
-  const name = document.getElementById("name").value.trim();
-  const price = document.getElementById("price").value.trim();
-  const image = document.getElementById("image").value.trim();
-  const link = document.getElementById("link").value.trim();
+      const name = document.getElementById("name").value.trim();
+      const price = document.getElementById("price").value.trim();
+      const image = document.getElementById("image").value.trim();
+      const link = document.getElementById("link").value.trim();
 
-  if(!name || !price){
-    showToast("Preencha nome e preço.");
-    return;
-  }
+      if (!name || !price) {
+        showToast("Preencha nome e preço.");
+        return;
+      }
 
-  addBtn.disabled = true;
-  addBtn.textContent = editingProductId ? "Salvando..." : "Adicionando...";
+      addBtn.disabled = true;
+      addBtn.textContent = editingProductId ? "Salvando..." : "Adicionando...";
 
-  try{
-    // Obtém o usuário atual
-    const user = auth.currentUser;
-    if (!user) {
-      showToast("Você precisa estar logado.");
-      return;
+      try {
+        const user = auth.currentUser;
+        if (!user) {
+          showToast("Você precisa estar logado.");
+          return;
+        }
+
+        if (editingProductId) {
+          await updateDoc(doc(db, "products", editingProductId), {
+            name,
+            price,
+            image,
+            link,
+            updatedAt: Date.now(),
+            updatedBy: user.email
+          });
+          showToast("Produto atualizado.");
+          editingProductId = null;
+        } else {
+          await addDoc(collection(db, "products"), {
+            name,
+            price,
+            image,
+            link,
+            createdAt: Date.now(),
+            createdBy: user.email
+          });
+          showToast("Produto adicionado.");
+        }
+
+        await loadProducts();
+        clearProductForm();
+        updateFormMode();
+
+      } catch (error) {
+        console.error(error);
+        showToast(editingProductId ? "Erro ao salvar edição." : "Erro ao adicionar.");
+      }
+
+      addBtn.disabled = false;
+      updateFormMode();
     }
-
-    if(editingProductId){
-      await updateDoc(doc(db,"products",editingProductId),{
-        name,
-        price,
-        image,
-        link,
-        updatedAt: Date.now(),
-        updatedBy: user.email // adiciona quem editou
-      });
-
-      showToast("Produto atualizado.");
-      editingProductId = null;
-    }else{
-      await addDoc(collection(db,"products"),{
-        name,
-        price,
-        image,
-        link,
-        createdAt: Date.now(),
-        createdBy: user.email // adiciona quem criou
-      });
-
-      showToast("Produto adicionado.");
-    }
-
-    await loadProducts();
-    clearProductForm();
-    updateFormMode();
-
-  }catch(error){
-    console.error(error);
-    showToast(editingProductId ? "Erro ao salvar edição." : "Erro ao adicionar.");
-  }
-
-  addBtn.disabled = false;
-  updateFormMode();
-}
 
     async function loadProducts() {
       try {
@@ -1624,33 +1621,32 @@
         };
 
         div.querySelector(".delete").onclick = async () => {
-  const confirmDelete = confirm(`Excluir "${name}"?`);
-  if(!confirmDelete) return;
+          const confirmDelete = confirm(`Excluir "${name}"?`);
+          if (!confirmDelete) return;
 
-  try{
-    // Obtém o usuário atual
-    const user = auth.currentUser;
-    if (!user) {
-      showToast("Você precisa estar logado.");
-      return;
-    }
+          try {
+            const user = auth.currentUser;
+            if (!user) {
+              showToast("Você precisa estar logado.");
+              return;
+            }
 
-    await deleteDoc(doc(db,"products",p.id));
+            await deleteDoc(doc(db, "products", p.id));
 
-    if(editingProductId === p.id){
-      editingProductId = null;
-      clearProductForm();
-      updateFormMode();
-    }
+            if (editingProductId === p.id) {
+              editingProductId = null;
+              clearProductForm();
+              updateFormMode();
+            }
 
-    showToast("Produto removido.");
-    await loadProducts();
+            showToast("Produto removido.");
+            await loadProducts();
 
-  }catch(error){
-    console.error(error);
-    showToast("Erro ao remover.");
-  }
-};
+          } catch (error) {
+            console.error(error);
+            showToast("Erro ao remover.");
+          }
+        };
 
         productsContainer.appendChild(div);
       });
