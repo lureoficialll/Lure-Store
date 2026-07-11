@@ -41,11 +41,246 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
+  <style>
+    /* ============================================================
+       ESTILOS ADICIONAIS – HERO COM BOTÕES LATERAIS + MODAL
+       ============================================================ */
+
+    .hero-card {
+      display: grid;
+      grid-template-columns: minmax(150px, 190px) 1fr minmax(140px, 200px);
+      gap: clamp(20px, 3vw, 40px);
+      align-items: center;
+      padding: 10px 0 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .hero-btn {
+      width: 100%;
+      justify-content: center;
+      padding: 0 12px;
+      height: 46px;
+      border-radius: 14px;
+      border: 1px solid rgba(0, 0, 0, .15);
+      background: #fff;
+      color: #111;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 800;
+      transition: .25s;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 14px;
+    }
+
+    .hero-btn:hover {
+      transform: translateY(-2px);
+      background: #f0f0f0;
+    }
+
+    .hero-btn-icon {
+      width: 19px;
+      height: 19px;
+      object-fit: contain;
+      filter: brightness(0);
+    }
+
+    /* Nav – ícone do Instagram */
+    .desktop-nav .nav-instagram {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #222;
+      transition: .25s;
+    }
+
+    .desktop-nav .nav-instagram:hover {
+      background: #111;
+      transform: scale(1.05);
+    }
+
+    .desktop-nav .nav-instagram img {
+      width: 20px;
+      height: 20px;
+      filter: brightness(0) invert(1);
+    }
+
+    /* Verificado no logo */
+    .logo-verified {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-verified .verified-icon {
+      width: 22px;
+      height: 22px;
+      filter: brightness(0);
+      flex-shrink: 0;
+    }
+
+    /* ===== MODAL ===== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-box {
+      max-width: 440px;
+      width: 100%;
+      background: #fff;
+      border-radius: 28px;
+      padding: 32px 28px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+      position: relative;
+      animation: modalFade .35s ease;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      background: none;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      color: #888;
+      transition: .2s;
+      line-height: 1;
+    }
+
+    .modal-close:hover {
+      color: #111;
+      transform: rotate(90deg);
+    }
+
+    .modal-box h2 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: #111;
+    }
+
+    .modal-box p {
+      color: #555;
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .modal-email {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: #f5f5f5;
+      border-radius: 14px;
+      font-weight: 600;
+      color: #111;
+      word-break: break-all;
+    }
+
+    .modal-email img {
+      width: 22px;
+      height: 22px;
+      filter: brightness(0);
+      flex-shrink: 0;
+    }
+
+    @keyframes modalFade {
+      from {
+        opacity: 0;
+        transform: scale(0.96) translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    /* ===== RESPONSIVO ===== */
+    @media (max-width: 760px) {
+      .hero-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 16px;
+      }
+
+      .hero-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero-btn {
+        width: auto;
+        padding: 0 18px;
+        height: 44px;
+      }
+
+      .hero-left {
+        order: 1;
+      }
+      .hero-center {
+        order: 2;
+      }
+      .hero-actions {
+        order: 3;
+      }
+
+      .logo-verified .verified-icon {
+        width: 18px;
+        height: 18px;
+      }
+
+      .modal-box {
+        padding: 24px 18px;
+      }
+
+      .desktop-nav .nav-instagram {
+        width: 34px;
+        height: 34px;
+      }
+      .desktop-nav .nav-instagram img {
+        width: 17px;
+        height: 17px;
+      }
+    }
+
+    @media (max-width: 1100px) and (min-width: 761px) {
+      .hero-card {
+        grid-template-columns: 160px 1fr 160px;
+      }
+    }
+  </style>
+
 </head>
 
 <body>
 
-  <!-- Top bar -->
+  <!-- Top bar (oferta) -->
   <div class="top-offer-bar">
     <img
       src="Icones/Icon/shopping-bag.svg"
@@ -75,9 +310,16 @@
           L
         </div>
 
-        <div class="logo-text">
+        <div class="logo-text logo-verified">
 
           <h2>LURE STORE</h2>
+
+          <img
+            src="Icones/Icon/badge-check.svg"
+            alt="Verificado"
+            class="verified-icon"
+            draggable="false"
+          >
 
           <p>OFICIAL</p>
 
@@ -93,9 +335,18 @@
         <a href="#ofertas">
           Ofertas
         </a>
-        <a href="#contato">
+        <a href="#contato" id="contactNavBtn">
           <img src="Icones/Icon/info.svg" alt="" class="nav-icon" draggable="false">
           Contato
+        </a>
+        <a
+          href="https://www.instagram.com/lurestore/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="nav-instagram"
+          aria-label="Instagram"
+        >
+          <img src="Icones/Icon/instagram.svg" alt="Instagram" draggable="false">
         </a>
       </nav>
 
@@ -111,7 +362,7 @@
 
     </header>
 
-    <!-- Hero -->
+    <!-- Hero – versão simplificada sem imagem lateral -->
     <section class="hero-card" id="inicio">
 
       <div class="hero-left">
@@ -132,7 +383,7 @@
       <div class="hero-center">
 
         <h1>
-          Lure Store
+          @lurestore
           <img
             src="Icones/Icon/badge-check.svg"
             alt="Verificado"
@@ -141,65 +392,41 @@
           >
         </h1>
 
-        <p class="subtitle">
-          Ofertas e Achadinhos
-        </p>
-
-        <p class="bio">
-          Os melhores produtos, promoções e achadinhos da internet em um só lugar.
-        </p>
-
-        <div class="hero-actions">
-
-          <a
-            class="hero-btn"
-            href="https://www.instagram.com/lure_oficiall/"
-            target="_blank"
-            rel="noopener noreferrer">
-
-            <img
-              src="Icones/Icon/instagram.svg"
-              alt=""
-              class="hero-btn-icon"
-              draggable="false">
-
-            Instagram
-          </a>
-
-          <a
-            class="hero-btn"
-            href="mailto:lureoficialll@gmail.com">
-
-            <img
-              src="Icones/Icon/mail.svg"
-              alt=""
-              class="hero-btn-icon"
-              draggable="false">
-
-            E-mail
-          </a>
-
-        </div>
+        <!-- Título e descrição removidos conforme solicitado -->
 
       </div>
 
+      <!-- Botões na lateral direita (coluna 3) -->
+      <div class="hero-actions">
 
-        <div class="discount-bubble">
+        <a
+          class="hero-btn"
+          href="https://www.instagram.com/lurestore/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img
-            src="Icones/Icon/percent.svg"
+            src="Icones/Icon/instagram.svg"
             alt=""
-            class="discount-icon"
+            class="hero-btn-icon"
             draggable="false"
           >
-        </div>
+          Instagram
+        </a>
 
-        <div class="coin coin-1">
-          <img src="Icones/Icon/coin.svg" alt="" draggable="false">
-        </div>
-
-        <div class="coin coin-2">
-          <img src="Icones/Icon/coin.svg" alt="" draggable="false">
-        </div>
+        <button
+          class="hero-btn"
+          id="contactHeroBtn"
+          type="button"
+        >
+          <img
+            src="Icones/Icon/mail.svg"
+            alt=""
+            class="hero-btn-icon"
+            draggable="false"
+          >
+          Contato
+        </button>
 
       </div>
 
@@ -220,117 +447,104 @@
           <button
             class="see-all-btn"
             type="button"
-            onclick="window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})">
-
+            onclick="window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})"
+          >
             Ver todos
             <span>→</span>
-
           </button>
 
           <button
             class="layout-toggle"
             id="layoutToggle"
             type="button"
-            aria-label="Trocar visual dos cards">
-
+            aria-label="Trocar visual dos cards"
+          >
             <img
               src="Icones/Icon/layout-grid.svg"
               alt=""
               id="layoutIcon"
               draggable="false"
             >
-
           </button>
 
         </div>
 
       </div>
 
-      <div class="products" id="products">
-
-      </div>
+      <div class="products" id="products"></div>
 
     </section>
 
-    <!-- Selos de segurança -->
-    <section class="security-strip">
-
-      <div>
-        <img src="Icones/Icon/shield-check.svg" alt="" class="strip-icon" draggable="false">
-        <span>Todos os produtos são selecionados com cuidado.</span>
-      </div>
-
-      <div>
-        <img src="Icones/Icon/lock.svg" alt="" class="strip-icon" draggable="false">
-        <span>Links verificados para comprar com segurança.</span>
-      </div>
-
-    </section>
-
-    <!-- Banner Instagram -->
-    <section class="instagram-banner" id="contato">
-
-      <div class="gift-box">
-        <img
-          src="Icones/Image/CAIXA.png"
-          alt=""
-          draggable="false"
-        >
-      </div>
-
-      <div class="instagram-banner-content">
-
-        <h2>Novas ofertas todos os dias!</h2>
-
-        <p>
-          Siga a Lure Store no Instagram e não perca nenhuma promoção.
-        </p>
-
-        <a
-          href="https://www.instagram.com/lure_oficiall/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="instagram-banner-btn">
-
-          <img
-            src="Icones/Icon/instagram.svg"
-            alt=""
-            class="banner-btn-icon"
-            draggable="false"
-          >
-
-          Seguir no Instagram
-        </a>
-
-      </div>
-
-      <div class="phone-preview">
-        @lurestore
-      </div>
-
-    </section>
-
-    <!-- Rodapé -->
+    <!-- Rodapé simplificado -->
     <footer class="footer">
-
       <p>© 2026 Lure Store. Todos os direitos reservados.</p>
-
       <button
         class="back-top-btn"
         type="button"
-        onclick="window.scrollTo({top:0,behavior:'smooth'})">
-
+        onclick="window.scrollTo({top:0,behavior:'smooth'})"
+      >
         ↑ Voltar ao topo
       </button>
-
     </footer>
 
   </main>
+
+  <!-- ===== MODAL DE CONTATO ===== -->
+  <div class="modal-overlay" id="contactModal">
+    <div class="modal-box">
+      <button class="modal-close" id="modalCloseBtn" type="button" aria-label="Fechar">✕</button>
+      <h2>📧 Entre em contato</h2>
+      <p>Fale conosco pelo e-mail abaixo. Respondemos o mais rápido possível!</p>
+      <div class="modal-email">
+        <img src="Icones/Icon/mail.svg" alt="E-mail" draggable="false">
+        <span>lureoficialll@gmail.com</span>
+      </div>
+    </div>
+  </div>
 
   <script type="module" src="firebase.js"></script>
   <script type="module" src="script.js"></script>
 
   <script>
+    // ============================================================
+    // MODAL DE CONTATO
+    // ============================================================
+
+    (function() {
+      const modal = document.getElementById('contactModal');
+      const closeBtn = document.getElementById('modalCloseBtn');
+      const contactNavBtn = document.getElementById('contactNavBtn');
+      const contactHeroBtn = document.getElementById('contactHeroBtn');
+
+      function openModal(e) {
+        if (e) e.preventDefault();
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      if (contactNavBtn) contactNavBtn.addEventListener('click', openModal);
+      if (contactHeroBtn) contactHeroBtn.addEventListener('click', openModal);
+
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) closeModal();
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeModal();
+      });
+    })();
+
+    // ============================================================
+    // SERVICE WORKER E INSTALAÇÃO (já existentes)
+    // ============================================================
+
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
         navigator.serviceWorker.register("./sw.js");
@@ -338,30 +552,20 @@
     }
 
     let deferredPrompt = null;
-
     const installBtn = document.getElementById("installBtn");
 
     if (installBtn) {
-
-      const isIOS =
-        /iphone|ipad|ipod/i.test(navigator.userAgent);
-
-      const isStandalone =
-        window.matchMedia("(display-mode: standalone)").matches ||
-        navigator.standalone;
+      const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+      const isStandalone = window.matchMedia("(display-mode: standalone)").matches || navigator.standalone;
 
       installBtn.style.display = "none";
 
       window.addEventListener("beforeinstallprompt", (e) => {
-
         e.preventDefault();
-
         deferredPrompt = e;
-
         if (!isStandalone) {
           installBtn.style.display = "flex";
         }
-
       });
 
       if (isIOS && !isStandalone) {
@@ -369,39 +573,23 @@
       }
 
       installBtn.addEventListener("click", async () => {
-
         if (isIOS) {
-
-          alert(
-            "Para instalar o aplicativo:\n\nSafari → Compartilhar → Adicionar à Tela de Início"
-          );
-
+          alert("Para instalar o aplicativo:\n\nSafari → Compartilhar → Adicionar à Tela de Início");
           return;
         }
-
         if (!deferredPrompt) {
-
           alert("Instalação indisponível no momento.");
-
           return;
         }
-
         deferredPrompt.prompt();
-
         await deferredPrompt.userChoice;
-
         deferredPrompt = null;
-
         installBtn.style.display = "none";
-
       });
 
       window.addEventListener("appinstalled", () => {
-
         installBtn.style.display = "none";
-
       });
-
     }
   </script>
 
